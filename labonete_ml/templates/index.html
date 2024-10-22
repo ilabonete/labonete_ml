@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Classifier</title>
+    <style>
+        /* Style the checkboxes as circles */
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            outline: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #333;
+        }
+
+        /* Align checkboxes and labels horizontally */
+        .checkbox-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 400px; /* Adjust this width as needed */
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Disease Classifier</h1>
+    <form method="POST">  
+        <label for="clump_thickness">Clump Thickness:</label>
+        <input type="text" id="clump_thickness" name="clump_thickness" required><br><br>
+
+        <label for="uniformity_cell_size">Uniformity Cell Size:</label>
+        <input type="text" id="uniformity_cell_size" name="uniformity_cell_size" required><br><br>
+
+        <label for="uniformity_cell_shape">Uniformity Cell Shape:</label>
+        <input type="text" id="uniformity_cell_shape" name="uniformity_cell_shape" required><br><br>
+
+        <label for="marginal_adhesion">Marginal Adhesion:</label>
+        <input type="text" id="marginal_adhesion" name="marginal_adhesion" required><br><br>
+
+        <label for="single_epithelial_cell_size">Single Epithelial Cell Size:</label>
+        <input type="text" id="single_epithelial_cell_size" name="single_epithelial_cell_size" required><br><br>
+
+        <label for="bland_chromatin">Bland Chromatin:</label>
+        <input type="text" id="bland_chromatin" name="bland_chromatin" required><br><br>
+
+        <label for="normal_nucleoli">Normal Nucleoli:</label>
+        <input type="text" id="normal_nucleoli" name="normal_nucleoli" required><br><br>
+
+        <label for="model">Classifier:</label><br>
+        <div class="checkbox-container">
+            <input type="checkbox" id="nearest_neighbor" name="model" value="Nearest Neighbor">
+            <label for="nearest_neighbor">Nearest Neighbor</label>
+
+            <input type="checkbox" id="naive_bayes" name="model" value="Naïve Bayes">
+            <label for="naive_bayes">Naïve Bayes</label>
+
+            <input type="checkbox" id="decision_tree" name="model" value="Decision Tree">
+            <label for="decision_tree">Decision Tree</label>
+        </div>
+
+        <button type="submit">Classify</button>
+    </form>
+
+    {% if prediction %}
+        <h2>Prediction</h2>
+        <p><strong>Inputs:</strong> {{ inputs }}</p>
+        <p><strong>Classifiers:</strong> {{ model }}</p>
+        <p><strong>Predictions:</strong></p>
+        <ul>
+            {% for result in prediction %}
+                <li>{{ result }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
